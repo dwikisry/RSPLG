@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.dwiki.rsd.API.APIRequestData;
 import com.dwiki.rsd.API.RetroServer;
+import com.dwiki.rsd.Activity.DetailActivity;
 import com.dwiki.rsd.Activity.MainActivity;
 import com.dwiki.rsd.Activity.UbahActivity;
 import com.dwiki.rsd.Model.ModelResponse;
@@ -58,6 +59,26 @@ public class AdapterRumahSakit extends RecyclerView.Adapter<AdapterRumahSakit.VH
                 .with(ctx)
                 .load(MRS.getFoto())
                 .into(holder.ivFoto);
+
+        holder.btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String xNama, xFoto,xDeskripsi, xLokasi, xKoordinat;
+                xNama = MRS.getNama();
+                xFoto = MRS.getFoto();
+                xDeskripsi = MRS.getDeskripsi();
+                xLokasi = MRS.getLokasi();
+                xKoordinat = MRS.getKoordinat();
+
+                Intent kirim = new Intent(ctx, DetailActivity.class);
+                kirim.putExtra("xNama",xNama);
+                kirim.putExtra("xFoto",xFoto);
+                kirim.putExtra("xDeskripsi",xDeskripsi);
+                kirim.putExtra("xLokasi",xLokasi);
+                kirim.putExtra("xKoordinat",xKoordinat);
+                ctx.startActivity(kirim);
+            }
+        });
     }
 
     @Override
